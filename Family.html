@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Family &hearts;</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;600&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)),
+                  url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&q=80') center/cover fixed;
+      color: #fff8f0;
+      min-height: 100vh;
+      line-height: 1.8;
+    }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; text-align: center; }
+    h1 { font-family: 'Dancing Script', cursive; font-size: 4rem; color: #ffb6c1; margin-bottom: 10px; }
+    .subtitle { font-size: 1.4rem; color: #ff9999; margin-bottom: 40px; font-style: italic; }
+
+    .member {
+      display: flex;
+      align-items: flex-start;
+      background: rgba(30,20,50,0.6);
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      border-radius: 20px;
+      margin: 30px auto;
+      max-width: 800px;
+      text-align: left;
+      border-left: 5px solid #ffb6c1;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      gap: 20px;
+    }
+
+    .member img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #ffb6c1;
+      flex-shrink: 0;
+    }
+
+    .member-text { flex: 1; }
+
+    .member h2 { color: #ffb6c1; margin-bottom: 10px; font-family: 'Dancing Script', cursive; }
+
+    .heart { color: #ff6b6b; font-size: 1.5rem; animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
+
+    footer { margin-top: 60px; font-size: 1.1rem; color: #ff9999; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>My Family <span class="heart">&hearts;</span></h1>
+    <p class="subtitle">I grew up in a family full of love, perseverance, and support—where each member plays a unique role in shaping who I am today.</p>
+
+    <div class="member">
+      <img src="mom.jpg" alt="Mama">
+      <div class="member-text">
+        <h2>Mama</h2>
+        <p>Mama is our strongest pillar, always working tirelessly and sacrificing her time for us. Whether selling goods in town or managing tasks at the office, she ensures that the three of us siblings are provided for and that our family stays together. Her love and dedication inspire us to persevere and value hard work.</p>
+      </div>
+    </div>
+
+    <div class="member">
+      <img src="dad.jpg" alt="Daddy">
+      <div class="member-text">
+        <h2>Daddy</h2>
+        <p>Daddy has another family with five children, but he continues to support and guide us siblings. Despite different households and situations, he has never neglected us. His presence and advice remind us of the importance of responsibility and family bonds.</p>
+      </div>
+    </div>
+
+    <div class="member">
+      <img src="may.jpg" alt="Ate May">
+      <div class="member-text">
+        <h2>Ate May</h2>
+        <p>Ate May is married with four children—three boys and one girl—and she is the eldest among us siblings. Even though she has her own family, she continues to give us support, guidance, and love. She shows that family connections remain strong even with new responsibilities.</p>
+      </div>
+    </div>
+
+    <div class="member">
+      <img src="jcel.jpg" alt="Jeselle">
+      <div class="member-text">
+        <h2>Jeselle</h2>
+        <p>Jeselle has faced challenges since childhood, diagnosed with hearing impairment and speech delay due to a medication overdose. She uses a hearing aid and faces life with determination, courage, and resilience. She is an inspiration to us, teaching us to confront our own challenges with strength.</p>
+      </div>
+    </div>
+
+    <div class="member">
+      <img src="yushi.jpg" alt="KC">
+      <div class="member-text">
+        <h2>KC</h2>
+        <p>I help Mama by selling and delivering goods in town or to offices. I am always busy assisting the family, ensuring everything runs smoothly, and supporting my siblings and Mama. Through my responsibilities, I have learned the values of perseverance, responsibility, and teamwork.</p>
+      </div>
+    </div>
+
+    <div class="member">
+      <img src="tin.jpg" alt="Kristine">
+      <div class="member-text">
+        <h2>Kristine</h2>
+        <p>Kristine is the youngest of our siblings, currently in Grade 8 in high school. She continues to grow and learn in a supportive family environment, and her presence brings joy and energy to our home.</p>
+      </div>
+    </div>
+
+    <footer>
+      &copy; 2025 &hearts; With love and gratitude to my family
+    </footer>
+  </div>
+</body>
+</html>

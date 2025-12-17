@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Best Friends - KC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; color: #fff; min-height: 100vh; background: #000; position: relative; overflow: hidden; }
+        #space { position: fixed; inset: 0; background: radial-gradient(ellipse at bottom, #1b2735 0%, #000 100%); z-index: -3; }
+        #stars { position: fixed; inset: 0; background: transparent url('https://assets.codepen.io/1538474/stars.png') repeat; animation: drift 250s linear infinite; opacity: 0.8; z-index: -2; }
+        @keyframes drift { from { background-position: 0 0; } to { background-position: 1000px 1000px; } }
+        #nebula { position: fixed; inset: 0; background: url('https://assets.codepen.io/1538474/nebula.png') center/cover no-repeat; opacity: 0.25; animation: rotate 300s linear infinite; z-index: -1; }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .content-modal-content {
+            background: rgba(30,30,60,0.95); padding: 3rem; border-radius: 25px;
+            max-width: 1200px; width: 90%; margin: 2rem auto; position: relative;
+            backdrop-filter: blur(15px); border: 1px solid rgba(120,115,245,0.5);
+            max-height: 95vh; overflow-y: auto;
+        }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 2.8rem; cursor: pointer; color: #fff; z-index: 10; }
+        .back-btn {
+            position: absolute; top: 20px; left: 25px;
+            background: rgba(120,115,245,0.4); border: 2px solid rgba(120,115,245,0.6);
+            color: white; padding: 12px 22px; border-radius: 50px; font-size: 1.1rem;
+            cursor: pointer; backdrop-filter: blur(10px); transition: all 0.4s;
+            box-shadow: 0 0 20px rgba(120,115,245,0.5); z-index: 11;
+        }
+        .back-btn:hover { background: rgba(120,115,245,0.8); transform: translateY(-3px); }
+
+        .friends-container { max-width: 1000px; margin: 0 auto; text-align: center; padding: 20px; }
+        .friends-container h1 { font-family: 'Dancing Script', cursive; font-size: 4.5rem; color: #ffb6c1; margin-bottom: 10px; }
+        .friends-subtitle { font-size: 1.4rem; color: #ff9999; margin-bottom: 60px; font-style: italic; }
+
+        /* 6 boxes — 2 rows x 3 columns, pantay-pantay */
+        .friends-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto 60px;
+        }
+        @media (max-width: 992px) { .friends-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .friends-grid { grid-template-columns: 1fr; } }
+
+        .friend-card {
+            background: rgba(50,30,80,0.7); backdrop-filter: blur(12px);
+            border-radius: 25px; overflow: hidden;
+            border: 2px solid rgba(255,182,193,0.4); transition: all 0.4s;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+        .friend-card:hover {
+            transform: translateY(-20px);
+            box-shadow: 0 25px 50px rgba(255,105,180,0.5);
+            border-color: #ff6b9d;
+        }
+        .friend-card img {
+            width: 100%; height: 300px; object-fit: cover; border-bottom: 4px solid rgba(162,155,254,0.6);
+        }
+        .friend-info {
+            padding: 20px;
+        }
+        .friend-name {
+            font-size: 2rem; color: #ffb6c1; margin-bottom: 12px; font-weight: 600;
+        }
+        .friend-letter {
+            font-size: 1.1rem; line-height: 1.7; opacity: 0.95; text-align: left;
+            background: rgba(0,0,0,0.3); padding: 15px; border-radius: 15px;
+            min-height: 140px;
+        }
+        .heart { color: #ff6ec4; animation: pulse 2s infinite; margin-left: 8px; }
+        @keyframes pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.4); } }
+        .footer { margin-top: 80px; font-size: 1.2rem; color: #ff9999; }
+    </style>
+</head>
+<body>
+    <div id="space"></div>
+    <div id="stars"></div>
+    <div id="nebula"></div>
+
+    <div class="content-modal-content">
+        <span class="close-modal" onclick="window.close()">×</span>
+        <button class="back-btn" onclick="history.back()">Back</button>
+
+        <div class="friends-container">
+            <h1>My Best Friends <span class="heart">♡</span></h1>
+            <p class="friends-subtitle">Friends who have become part of my life, even though our paths are different now</p>
+
+            <!-- 6 friends — 2 rows x 3 columns -->
+            <div class="friends-grid">
+                <!-- Dimple -->
+                <div class="friend-card">
+                    <div class="friend-info">
+                        <div class="friend-name">Dimple</div>
+                        <div class="friend-letter">
+                            My best friend since Grade 7 — we've been friends for 6 years! Kind but can also be a bit of a menace when it comes to joking around. ♡
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Jacquelyn -->
+                <div class="friend-card">
+                    <div class="friend-info">
+                        <div class="friend-name">Jacquelyn</div>
+                        <div class="friend-letter">
+                            I first met her in Grade 11. We were still shy on the first day, but we became close, so we started hanging out right away. Now she has a blessed baby. ♡
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lyka -->
+                <div class="friend-card">
+                    <div class="friend-info">
+                        <div class="friend-name">Lyka</div>
+                        <div class="friend-letter">
+                            My older sister was in the room back then. She was the second person I got to know, we were really close back then, we were inseparable..♡
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Danielle -->
+                <div class="friend-card">
+                    <div class="friend-info">
+                        <div class="friend-name">Danielle</div>
+                        <div class="friend-letter">
+                            My closest friend back then. We were always together everywhere, it felt like we couldn't be separated..♡
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kim -->
+                <div class="friend-card">
+                    <div class="friend-info">
+                        <div class="friend-name">Kim</div>
+                        <div class="friend-letter">
+                            I was only with her briefly, but we were very close. It's been 8 months since she passed away, graduation is near, but the pain is unbearable... it's such a shame with graduation coming up. Rest in peace. ♡
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Jaren -->
+                <div class="friend-card">
+                    <div class="friend-info">
+                        <div class="friend-name">Jaren</div>
+                        <div class="friend-letter">
+                            My first boy best friend! Partner in crime in all our crazy adventures. (I can say he is) kind but also a monster when it comes to fun — really intense! ♡
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

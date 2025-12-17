@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yushi's Soy Delight - Order Now</title>
+<style>
+    body{
+        font-family:'Segoe UI',Arial,sans-serif;
+        margin:0;
+        padding:0;
+        background:#f0f4f8;color:#333
+    }
+    .container{
+        max-width:1000px;
+        margin:20px auto;
+        background:#fff;
+        padding:30px;
+        border-radius:12px;
+        box-shadow:0 4px 20px rgba(0,0,0,0.1)
+    }
+    .header{
+        text-align:center;
+        padding:30px;
+        background:linear-gradient(135deg,#4caf50,#81c784);
+        color:#fff;
+        border-radius:12px 12px 0 0;
+        margin:-30px -30px 40px}
+    .header 
+    h1{
+        margin:0;
+        font-size:38px
+    }
+    .products{
+        display:flex;
+        flex-wrap:wrap;
+        gap:20px;
+        margin:20px 0
+    }
+    .product-card{
+        flex:1 1 300px;
+        background:#fff;
+        padding:20px;
+        border-radius:8px;
+        border:1px solid #ddd;
+        box-shadow:0 2px 8px rgba(0,0,0,0.05);
+        transition:.2s
+    }
+    .product-card:hover{
+        transform:translateY(-5px);
+        box-shadow:0 8px 20px rgba(0,0,0,0.1)
+    }
+    .product-card select,.product-card input[type=number]{
+        width:100%;
+        padding:12px;
+        margin:8px 0;
+        border:1px solid #ccc;
+        border-radius:6px;
+        font-size:16px}
+    .product-total{
+        font-weight:bold;
+        color:#388e3c;
+        margin-top:10px;
+        font-size:25px
+    }
+    .addons-section{
+        margin:30px 0;
+        padding:20px;
+        background:#fff3e0;
+        border-radius:10px;
+        border:1px solid #ffcc80
+    }
+    .addons-section label{
+        display:block;
+        margin:12px 0;
+        font-size:16px
+    }
+    .grand-total{
+        background:#e8f5e9;
+        padding:25px;
+        border-radius:12px;
+        margin:30px 0;text-align:center
+    }
+    .grand-total .total-amount{
+        font-size:36px;
+        font-weight:bold;
+        color:#2e7d32}
+    .payment-section{
+        margin:40px 0;
+        padding:25px;
+        background:linear-gradient(135deg,#e3f2fd,#bbdefb);
+        border-radius:15px;
+        border:3px solid #2196f3;
+        text-align:center
+    }
+    #customer-payment{
+        font-size:28px;
+        padding:10px;
+        width:320px;
+        text-align:center;
+        border:4px solid #1976d2;
+        border-radius:15px;
+        background:white;
+        box-shadow:0 4px 10px rgba(0,0,0,0.1)
+    }
+    input[type=number]{-moz-appearance:textfield;appearance:textfield}
+    input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0
+    }
+    .quick-cash-buttons{
+        margin:20px 0;
+        display:flex;
+        flex-wrap:wrap;
+        gap:15px;
+        justify-content:center
+    }
+    .cash-btn{
+        padding:14px 20px;
+        font-size:18px;
+        background:#2196f3;
+        color:white;
+        border:none;
+        border-radius:12px;
+        cursor:pointer;
+        min-width:120px;
+        transition:.2s
+    }
+    .cash-btn:hover{
+        background:#1976d2;
+        transform:scale(1.05)
+    }
+    .cash-btn.exact{
+        background:Green
+    }
+    .cash-btn.exact:hover{background:#388e3c}
+    .change-display{
+        font-size:28px;
+        font-weight:bold;
+        padding:20px;
+        background:white;
+        border-radius:15px;margin:20px 0;min-height:50px}
+    .receipt-summary{margin:30px auto;padding:25px;background:#f9f9f9;border:2px dashed #333;border-radius:12px;font-family:'Courier New',monospace;font-size:50px;white-space:pre-line;display:none;max-width:500px}
+    
+    /* BEAUTIFUL ORDER NOW SECTION - EXACTLY LIKE YOUR PICTURE */
+    .order-form{margin:40px 0;padding:30px;background:#f8fff8;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,0.05)}
+    .order-form h1{font-size:32px;margin-bottom:25px;text-align:center;color:#2e7d32}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:15px;margin-bottom:20px}
+    .form-grid input, .form-grid textarea{width:100%;padding:14px;border:1px solid #ccc;border-radius:8px;font-size:16px}
+    .form-grid textarea{grid-column:1/4;height:100px;resize:none}
+    .submit-btn{background:#4caf50;color:white;padding:18px 50px;font-size:22px;font-weight:bold;border:none;border-radius:12px;cursor:pointer;float:right;transition:.3s}
+    .submit-btn:hover{background:#388e3c;transform:scale(1.05)}
+    .footer{text-align:center;padding:20px;color:#666;font-size:14px}
+    @media(max-width:768px){
+        .form-grid{grid-template-columns:1fr}
+        .form-grid textarea{grid-column:1}
+        .submit-btn{width:100%;float:none}
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Yushi's Soy Delight</h1>
+        <p>Fresh, Healthy, and Delicious Soy Products</p>
+        <p>0955 126 3548 • bizsweet.taho@gmail.com</p>
+    </div>
+
+    <!-- PRODUCTS -->
+    <div class="products">
+        <div class="product-card">
+            <h2>Tofu</h2>
+            <select name="tofu" onchange="calc()">
+               <h2><option value="0">Choose</option></h2>
+                <h3><option value="65">½kg - ₱65</option></h3>
+                <h3><option value="130">1kg - ₱130</option></h3>
+            </select>
+            <input type="number" value="1" min="1" oninput="calc()">
+            <div class="product-total">₱0</div>
+        </div>
+        <div class="product-card">
+            <h2>Taho</h2>
+            <select name="taho" onchange="calc()">
+                <h2><option value="0">Choose</option></h2>
+                <h3><option value="35">1pc - ₱35</option></h3>
+                <h3><option value="100">3pcs - ₱100</option></h3>
+            </select>
+            <input type="number" value="1" min="1" oninput="calc()">
+            <div class="product-total">₱0</div>
+        </div>
+        <div class="product-card">
+            <h2>Soy Milk</h2>
+            <select name="soymilk" onchange="calc()">
+                <h2><option value="0">Choose</option></h2>
+                <h3><option value="100">1.5L - ₱100</option></h3>
+                <h3><option value="25">Small - ₱25</option></h3>
+            </select>
+            <input type="number" value="1" min="1" oninput="calc()">
+            <div class="product-total">₱0</div>
+        </div>
+    </div>
+
+    <div class="addons-section">
+        <h2>Add-ons (₱5 each)</h2>
+        <h2><input type="checkbox" onchange="calc()"> Sago</h2>
+        <h2><input type="checkbox" onchange="calc()"> Arnibal</h2>
+        <div class="product-total" id="addons_total">₱0</div>
+    </div>
+
+    <div class="grand-total">
+        <h3>TOTAL AMOUNT</h3>
+        <div class="total-amount" id="total">₱0</div>
+    </div>
+
+    <div class="payment-section">
+        <h2>Customer Payment</h2>
+        <input type="number" id="payment" placeholder="Enter amount" oninput="calcChange()">
+        <div class="quick-cash-buttons">
+            <button type="button" class="cash-btn" onclick="setPay(100)">₱100</button>
+            <button type="button" class="cash-btn" onclick="setPay(200)">₱200</button>
+            <button type="button" class="cash-btn" onclick="setPay(500)">₱500</button>
+            <button type="button" class="cash-btn exact" onclick="setPay(document.querySelector('#total').innerText.replace('₱',''))">Exact</button>
+        </div>
+        <div class="change-display" id="change">Change: ₱0</div>
+        <div id="receipt" class="receipt-summary"></div>
+    </div>
+
+    <!-- EXACTLY LIKE YOUR PICTURE -->
+    <div class="order-form">
+        <h1>Order Now!</h1>
+        <form action="https://formspree.io/f/your-email-here" method="POST"> <!-- Palitan mo ng Formspree or EmailJS -->
+            <div class="form-grid">
+                <input type="text" name="name" placeholder="Full Name" required>
+                <input type="email" name="email" placeholder="Email Address" required>
+                <input type="tel" name="phone" placeholder="Cellphone Number" required>
+                <textarea name="address" placeholder="Delivery Address" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Submit the Order</button>
+            <div style="clear:both"></div>
+        </form>
+    </div>
+
+    <div class="footer">
+        <p>© 2025 Yushi's Soy Delight • Made with ❤️ • Thank you po!</p>
+    </div>
+</div>
+
+<script>
+function calc(){
+    let t=0;
+    document.querySelectorAll('.product-card').forEach(c=>{
+        const sel=c.querySelector('select').value;
+        const qty=c.querySelector('input[type=number]').value||0;
+        const sub=sel*qty;
+        c.querySelector('.product-total').innerText='₱'+sub;
+        t+=sub;
+    });
+    const addons=document.querySelectorAll('.addons-section input:checked').length*5;
+    document.getElementById('addons_total').innerText='₱'+addons;
+    t+=addons;
+    document.getElementById('total').innerText='₱'+t;
+    calcChange();
+}
+function setPay(a){document.getElementById('payment').value=a;calcChange();}
+function calcChange(){
+    const total=parseFloat(document.getElementById('total').innerText.replace('₱',''));
+    const pay=parseFloat(document.getElementById('payment').value||0);
+    const change=pay-total;
+    if(pay>=total&&total>0){
+        document.getElementById('change').innerText='Change: ₱'+change.toFixed(2);
+        document.getElementById('change').style.color='#2e7d32';
+        showReceipt();
+    }else if(pay>0){
+        document.getElementById('change').innerText='Kulang ₱'+(total-pay).toFixed(2);
+        document.getElementById('change').style.color='red';
+        document.getElementById('receipt').style.display='none';
+    }
+}
+function showReceipt(){
+    let r="════════════════════════════\n";
+    r+="   YUSHI'S SOY DELIGHT   \n";
+    r+="════════════════════════════\n\n";
+    document.querySelectorAll('.product-card').forEach(c=>{
+        const sel=c.querySelector('select');
+        const qty=c.querySelector('input[type=number]').value;
+        if(sel.selectedIndex>0) r+=`${sel.options[sel.selectedIndex].text.split(' - ')[0]} ×${qty}\n`;
+    });
+    const add=document.querySelectorAll('.addons-section input:checked');
+    if(add.length>0) r+=`Add-ons: ${Array.from(add).map(x=>x.parentNode.textContent.trim()).join(', ')}\n`;
+    const total=document.getElementById('total').innerText;
+    const pay=document.getElementById('payment').value;
+    const change=(pay-total.replace('₱','')).toFixed(2);
+    r+=`\nTOTAL: ${total}\nPAYMENT: ₱${pay}\nCHANGE: ₱${change}\n`;
+    r+="════════════════════════════\n";
+    r+="   THANK YOU! ❤️   \n";
+    document.getElementById('receipt').textContent=r;
+    document.getElementById('receipt').style.display='block';
+}
+calc();
+</script>
+</body>
+</html>

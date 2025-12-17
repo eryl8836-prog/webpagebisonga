@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All About Me - KC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            min-height: 100vh;
+            background: #000;
+            position: relative;
+            overflow-x: hidden;
+        }
+        /* Galaxy background */
+        #space { position: fixed; inset: 0; background: radial-gradient(ellipse at bottom, #1b2735 0%, #000 100%); z-index: -3; }
+        #stars { position: fixed; inset: 0; background: transparent url('https://assets.codepen.io/1538474/stars.png') repeat; animation: drift 250s linear infinite; opacity: 0.8; z-index: -2; }
+        @keyframes drift { from { background-position: 0 0; } to { background-position: 1000px 1000px; } }
+        #nebula { position: fixed; inset: 0; background: url('https://assets.codepen.io/1538474/nebula.png') center/cover no-repeat; opacity: 0.25; animation: rotate 300s linear infinite; z-index: -1; }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        /* Floating planets & shooting stars */
+        .floating-planet { position: fixed; width: 20px; height: 20px; border-radius: 50%; opacity: 0.3; animation: float linear infinite; z-index: 0; pointer-events: none; }
+        .floating-planet:nth-child(1) { background: #ff6b9d; left: 10%; animation-duration: 60s; }
+        .floating-planet:nth-child(2) { background: #4ecdc4; left: 80%; animation-duration: 80s; animation-delay: 15s; }
+        .floating-planet:nth-child(3) { background: #45b7d1; right: 15%; animation-duration: 50s; animation-delay: 30s; }
+        .floating-planet:nth-child(4) { background: #96ceb4; left: 60%; animation-duration: 70s; animation-delay: 45s; }
+        @keyframes float { 0% { transform: translateY(100vh) rotate(0deg); opacity: 0; } 10% { opacity: 0.3; } 90% { opacity: 0.3; } 100% { transform: translateY(-100px) rotate(360deg); opacity: 0; } }
+        .shooting-star { position: fixed; width: 3px; height: 100px; background: linear-gradient(180deg, #fff, transparent); box-shadow: 0 0 15px #fff; transform: rotate(-45deg); animation: shoot linear infinite; pointer-events: none; z-index: 1; }
+        @keyframes shoot { 0% { transform: translateX(-300px) translateY(-300px) rotate(-45deg); opacity: 0; } 8% { opacity: 1; } 92% { opacity: 1; } 100% { transform: translateX(200vw) translateY(200vh) rotate(-45deg); opacity: 0; } }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; text-align: center; position: relative; z-index: 10; }
+        h1 { font-size: 4.5rem; margin: 2rem 0 0.5rem; background: linear-gradient(90deg, #ff6ec4, #7873f5, #00c9ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* Navigation Tabs */
+        .nav-buttons { 
+            margin-bottom: 4rem; 
+            display: flex; 
+            justify-content: center; 
+            flex-wrap: wrap; 
+            gap: 1rem; 
+        }
+        .nav-btn { 
+            padding: 12px 30px; 
+            background: rgba(255,255,255,0.15); 
+            backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255,255,255,0.2); 
+            border-radius: 50px; 
+            color: white; 
+            text-decoration: none; 
+            font-weight: 500; 
+            transition: all 0.4s; 
+            cursor: pointer;
+        }
+        .nav-btn:hover { background: #7873f5; transform: translateY(-5px); box-shadow: 0 0 25px rgba(120,115,245,0.8); }
+        .nav-btn.active { background: #7873f5; box-shadow: 0 0 25px rgba(120,115,245,0.8); transform: translateY(-5px); }
+
+        /* Tab Content */
+        .tab-content { display: none; animation: fadeIn 0.8s; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .profile-section { display: flex; align-items: center; justify-content: center; gap: 4rem; margin: 4rem 0; flex-wrap: wrap; }
+        .profile-img { width: 220px; height: 220px; border-radius: 50%; border: 8px solid rgba(255,255,255,0.2); object-fit: cover; box-shadow: 0 0 40px rgba(120,115,245,0.6); }
+        .intro-text { max-width: 1000px; margin: 0 auto; text-align: left; font-size: 1.25rem; line-height: 1.8; background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 20px; backdrop-filter: blur(10px); }
+        .intro-text strong { color: #a29bfe; font-size: 1.4rem; }
+        .big-buttons { display: flex; justify-content: center; gap: 3rem; margin: 6rem 0; flex-wrap: wrap; }
+        .big-btn { padding: 1.8rem 3.5rem; background: rgba(120,115,245,0.3); backdrop-filter: blur(12px); border: 2px solid rgba(120,115,245,0.5); border-radius: 25px; font-size: 1.4rem; font-weight: 600; color: white; cursor: pointer; transition: all 0.4s; }
+        .big-btn:hover { background: rgba(120,115,245,0.7); transform: translateY(-10px); box-shadow: 0 0 40px rgba(120,115,245,0.9); }
+        .made-with { margin: 8rem 0 4rem; font-size: 1.1rem; opacity: 0.8; }
+
+        /* Interests & Quotes */
+        .modal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .modal-btn { padding: 1.3rem 1rem; background: rgba(120,115,245,0.3); border-radius: 15px; border: 1px solid rgba(120,115,245,0.5); font-size: 1.1rem; transition: all 0.3s; cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; }
+        .modal-btn:hover { background: rgba(120,115,245,0.7); transform: translateY(-5px); box-shadow: 0 0 25px rgba(120,115,245,0.7); }
+        .modal-btn i { margin-right: 10px; opacity: 0.8; font-size: 1.2rem; }
+        .quote-section { text-align: center; padding: 4rem 2rem; font-size: 1.5rem; line-height: 2.4; }
+        .quote { font-style: italic; margin: 2rem 0; }
+        .quote-author { color: #a29bfe; font-weight: 600; font-size: 1.3rem; }
+
+        /* Contact */
+        .contact-section { text-align: center; padding: 4rem; font-size: 1.4rem; }
+
+        /* Modals (unchanged) */
+        .modal, .content-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 1000; align-items: center; justify-content: center; padding: 2rem; overflow-y: auto; }
+        .modal-content, .content-modal-content { background: rgba(30,30,60,0.95); padding: 3rem; border-radius: 25px; max-width: 1200px; width: 95%; position: relative; backdrop-filter: blur(15px); border: 1px solid rgba(120,115,245,0.5); max-height: 95vh; overflow-y: auto; }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 2.8rem; cursor: pointer; color: #fff; z-index: 10; }
+        .modal-title { font-size: 2.4rem; margin-bottom: 2rem; background: linear-gradient(90deg, #ff6ec4, #7873f5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; }
+        .back-btn { position: absolute; top: 20px; left: 25px; background: rgba(120,115,245,0.4); border: 2px solid rgba(120,115,245,0.6); color: white; padding: 12px 22px; border-radius: 50px; font-size: 1.1rem; cursor: pointer; backdrop-filter: blur(10px); transition: all 0.4s; box-shadow: 0 0 20px rgba(120,115,245,0.5); z-index: 11; }
+        .back-btn:hover { background: rgba(120,115,245,0.8); transform: translateY(-3px); }
+        .section-container { max-width: 900px; margin: 0 auto; text-align: center; }
+        .section-container h1 { font-family: 'Dancing Script', cursive; font-size: 4.5rem; color: #ffb6c1; margin-bottom: 10px; }
+        .section-subtitle { font-size: 1.4rem; color: #ff9999; margin-bottom: 50px; font-style: italic; }
+        .heart { color: #ff6ec4; animation: pulse 2s infinite; margin-left: 8px; }
+        @keyframes pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.4); } }
+        .grid, .grid-3, .grid-4, .hobbies-grid, .pets-grid, .role-grid, .traits-grid, .sports-grid, .songs-grid, .circle-grid, .friends-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin: 3rem 0;
+        }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+        .grid-4 { grid-template-columns: repeat(auto-fit, minmax(300px, 5fr)); }
+        .card, .hobby-card, .pet-card, .role-card, .trait-card, .sport-card, .song-card, .friend-card {
+            background: rgba(120,115,245,0.2); border-radius: 15px; padding: 1.5rem; text-align: center; border: 1px solid rgba(120,115,245,0.4); transition: transform 0.3s;
+        }
+        .card:hover, .hobby-card:hover, .pet-card:hover { transform: translateY(-10px); }
+        .card img, .hobby-card img, .pet-card img, .role-card img, .trait-card img, .sport-card img, .song-card img, .friend-card img {
+            width: 100%; height: 220px; object-fit: cover; border-radius: 12px; margin-bottom: 1rem;
+        }
+        .card-title, .hobby-name, .pet-name, .role-name, .trait-name, .sport-name, .song-title, .friend-name {
+            font-size: 1.4rem; font-weight: 600; color: #a29bfe; margin-top: 0.5rem;
+        }
+        .member { display: flex; align-items: center; gap: 2rem; margin: 3rem 0; flex-wrap: wrap; justify-content: center; text-align: left; }
+        .member img { width: 220px; height: 220px; object-fit: cover; border-radius: 20px; border: 4px solid rgba(120,115,245,0.5); }
+        .member-text { flex: 1; min-width: 300px; }
+        .member-text h2 { font-size: 2rem; color: #a29bfe; margin-bottom: 1rem; }
+        .friend-info { padding: 1.5rem; text-align: left; }
+        .friend-letter { margin-top: 1rem; font-size: 1.1rem; opacity: 0.9; line-height: 1.6; }
+        .section-footer { margin-top: 4rem; font-size: 1.1rem; opacity: 0.8; padding: 2rem; }
+    </style>
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="floating-planet"></div><div class="floating-planet"></div><div class="floating-planet"></div><div class="floating-planet"></div>
+    <div id="space"></div>
+    <div id="stars"></div>
+    <div id="nebula"></div>
+
+    <div class="container">
+        <h1>⚜️ALL ABOUT ME⚜️</h1>
+        <h1>Welcome to my Portfolio!✨</h1>
+
+        <!-- Tab Navigation -->
+        <div class="nav-buttons">
+            <div class="nav-btn active" data-tab="home">🌟Home</div>
+            <div class="nav-btn" data-tab="about">🌟About Me</div>
+            <div class="nav-btn" data-tab="quotes">🌟Favourite Quotes</div>
+            <div class="nav-btn" data-tab="contact">🌟Contact Me</div>
+        </div>
+
+        <!-- Home Tab -->
+        <div class="tab-content active" id="home">
+            <div class="profile-section">
+                <img src="Yushi.png" alt="KC" class="profile-img">
+                <div class="intro-container">
+                    <div class="intro-text">
+                        <strong>Hi! I'm KC,</strong> 18 years old. I'm just an introvert in class, but I really enjoy learning something new in coding every day. I'm still a beginner, but my dream is to become a skilled web developer!✨
+                        <br><br>
+                        <strong>BSIT - 1F • Web Student • Beginner</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="big-buttons">
+                <div class="big-btn" id="openAboutModal">🪐Know More About Me</div>
+                <div class="big-btn" id="openProjectsModal">🪐My Projects</div>
+                <div class="big-btn" id="openGalleryModal">🪐My Gallery</div>
+            </div>
+            <div class="made-with">
+                🔱Made with Heart and lots of midnight coding by KC • 2025🔱
+            </div>
+        </div>
+
+        <!-- About Me Tab -->
+        <div class="tab-content" id="about">
+            <div class="intro-text" style="max-width: 900px; text-align: left; margin: 4rem auto;">
+                <strong>About Me</strong><br><br>
+                <p>Name: KC Depillo Bisonga</p><br>
+                <p>Age: 18 years old</p><br>
+                <p>Status: Single </p><br>
+                <p>Birthdate: August 22, 2007 </p><br>
+                <p>Address: Purok 2A, San Roque, San Jose Occidental Mindoro</p><br>
+                <p>Course: Bachelor of Science Information Technology</p><br>
+                <p>School Campus: Occidental Mindoro State College (OMSC)</p><br>
+            </div>
+        </div>
+
+        <!-- Interests Tab -->
+        <div class="tab-content" id="interests">
+            <h2 style="font-size: 3rem; margin: 2rem 0; background: linear-gradient(90deg, #ff6ec4, #7873f5); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                My Interests ✨
+            </h2>
+            <div class="modal-grid">
+                <div class="modal-btn" onclick="openContent('familyModal')"><i class="fas fa-users"></i>My Family</div>
+                <div class="modal-btn" onclick="openContent('hobbiesModal')"><i class="fas fa-gamepad"></i>Hobbies</div>
+                <div class="modal-btn" onclick="openContent('petsModal')"><i class="fas fa-paw"></i>My Pets</div>
+                <div class="modal-btn" onclick="openContent('roleModal')"><i class="fas fa-star"></i>My Role Models</div>
+                <div class="modal-btn" onclick="openContent('personalityModal')"><i class="fas fa-user"></i>My Personality</div>
+                <div class="modal-btn" onclick="openContent('sportsModal')"><i class="fas fa-futbol"></i>Favorite Sports</div>
+                <div class="modal-btn" onclick="openContent('musicModal')"><i class="fas fa-music"></i>Favorite Songs & Artist</div>
+                <div class="modal-btn" onclick="openContent('moviesModal')"><i class="fas fa-film"></i>Favorite Movies & Actors</div>
+                <div class="modal-btn" onclick="openContent('foodModal')"><i class="fas fa-utensils"></i>Favorite Foods & Drinks</div>
+                <div class="modal-btn" onclick="openContent('bestfriendsModal')"><i class="fas fa-user-friends"></i>My Best Friends</div>
+                <div class="modal-btn" onclick="openContent('circleModal')"><i class="fas fa-user-friends"></i>My Circle of Friends 2025</div>
+            </div>
+        </div>
+
+        <!-- Favourite Quotes Tab -->
+        <div class="tab-content" id="quotes">
+...">
+            <div class="quote-section">
+                <h2 style="font-size: 3rem; margin: 2rem 0; background: linear-gradient(90deg, #ff6ec4, #7873f5); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    🌟 Favourite Quotes
+                </h2>
+                <div class="quote">"The future belongs to those who believe in the beauty of their dreams."</div>
+                <div class="quote-author">— Jimin</div>
+                <div class="quote">"Love myself, love yourself."</div>
+                <div class="quote-author">— BTS</div>
+                <div class="quote">"Even when this rain stops, when clouds part, I’ll be here waiting."</div>
+                <div class="quote-author">— Spring Day</div>
+                <div class="quote">"I purple you forever 💜"</div>
+                <div class="quote-author">— V</div>
+            </div>
+        </div>
+
+       <!-- Contact Me Tab -->
+<div class="tab-content" id="contact">
+    <div class="contact-section">
+        <h2 style="font-size: 3rem; margin: 2rem 0; background: linear-gradient(90deg, #ff6ec4, #7873f5); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+            🌟 Contact Me
+        </h2>
+        <p style="font-size: 1.4rem; margin-bottom: 3rem; opacity: 0.9;">
+            Feel free to reach out! I'd love to connect with you 💜
+        </p>
+
+        <!-- Contact Links with Icons -->
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin: 3rem 0;">
+            <!-- Email -->
+            <a href="mailto:kcbisonga@email.com" class="modal-btn" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+                <i class="fas fa-envelope" style="font-size: 1.8rem;"></i>
+                <span>Email Me</span>
+            </a>
+
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/share/1BJPMnPFMF/" target="_blank" class="modal-btn" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+                <i class="fab fa-facebook-f" style="font-size: 1.8rem; color: #1877F2;"></i>
+                <span>Facebook</span>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/yushiparkxln?igsh=MXhsODhuY3F0MDN1OQ==
+" target="_blank" class="modal-btn" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+                <i class="fab fa-instagram" style="font-size: 1.8rem; color: #E4405F;"></i>
+                <span>Instagram</span>
+            </a>
+        </div>
+
+        <p style="margin-top: 3rem; opacity: 0.8;">
+            Or just say hi through my projects! ✨
+        </p>
+    </div>
+</div>
+
+    <!-- Know More About Me Modal (for big button) -->
+    <div class="modal" id="aboutModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeAbout">×</span>
+            <h2 class="modal-title">Know More About Me</h2>
+            <div class="modal-grid">
+                <div class="modal-btn" onclick="openContent('familyModal')"><i class="fas fa-users"></i>My Family</div>
+                <div class="modal-btn" onclick="openContent('hobbiesModal')"><i class="fas fa-gamepad"></i>Hobbies</div>
+                <div class="modal-btn" onclick="openContent('petsModal')"><i class="fas fa-paw"></i>My Pets</div>
+                <div class="modal-btn" onclick="openContent('roleModal')"><i class="fas fa-star"></i>My Role Models</div>
+                <div class="modal-btn" onclick="openContent('personalityModal')"><i class="fas fa-user"></i>My Personality</div>
+                <div class="modal-btn" onclick="openContent('sportsModal')"><i class="fas fa-futbol"></i>Favorite Sports</div>
+                <div class="modal-btn" onclick="openContent('musicModal')"><i class="fas fa-music"></i>Favorite Songs & Artist</div>
+                <div class="modal-btn" onclick="openContent('moviesModal')"><i class="fas fa-film"></i>Favorite Movies & Actors</div>
+                <div class="modal-btn" onclick="openContent('foodModal')"><i class="fas fa-utensils"></i>Favorite Foods & Drinks</div>
+                <div class="modal-btn" onclick="openContent('bestfriendsModal')"><i class="fas fa-user-friends"></i>My Best Friends</div>
+                <div class="modal-btn" onclick="openContent('circleModal')"><i class="fas fa-user-friends"></i>My Circle of Friends 2025</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- My Projects Modal -->
+    <div class="modal" id="projectsModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeProjects">×</span>
+            <h2 class="modal-title">My Projects</h2>
+            <div class="modal-grid">
+                <a href="STORY.html" target="_blank" class="modal-btn"><i class="fas fa-book"></i>VIEW STORY</a>
+                <a href="RECIPE.html" target="_blank" class="modal-btn"><i class="fas fa-receipt"></i>VIEW RECIPE</a>
+                <a href="ORDER FORM.html" target="_blank" class="modal-btn"><i class="fas fa-list"></i>VIEW ORDER FORM</a>
+                <a href="BIKE_ACT4.html" target="_blank" class="modal-btn"><i class="fas fa-bike"></i>VIEW BIKE_ACT4</a>
+                <a href="OFPHP.html" target="_blank" class="modal-btn"><i class="fas fa-question-calculator"></i>VIEW ORDER FORM PHP</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ALL CONTENT MODALS (Family, Hobbies, etc.) - same as your original -->
+    <!-- ==================== ALL CONTENT MODALS (MAY LAMAN NA LAHAT) ==================== -->
+
+    <!-- My Family -->
+    <div class="content-modal" id="familyModal">
+        <div class="content-modal-content">
+            <span class="close-modal" onclick="closeContent()">×</span>
+            <button class="back-btn" onclick="backToAbout()">← Back</button>
+            <div class="section-container">
+                <h1>My Family <span class="heart">♥</span></h1>
+                <p class="section-subtitle">I grew up in a family full of love, perseverance, and support—where each member plays a unique role in shaping who I am today.</p>
+                
+                <div class="member">
+                    <img src="mom.jpg" alt="Mama">
+                    <div class="member-text">
+                        <h2>Mama</h2>
+                        <p>Mama is our strongest pillar, always working tirelessly and sacrificing her time for us. Whether selling goods in town or managing tasks at the office, she ensures that the three of us siblings are provided for and that our family stays together. Her love and dedication inspire us to persevere and value hard work.</p>
+                    </div>
+                </div>
+                <div class="member">
+                    <img src="dad.jpg" alt="Daddy">
+                    <div class="member-text">
+                        <h2>Daddy</h2>
+                        <p>Daddy has another family with five children, but he continues to support and guide us siblings. Despite different households and situations, he has never neglected us. His presence and advice remind us of the importance of responsibility and family bonds.</p>
+                    </div>
+                </div>
+                <div class="member">
+                    <img src="may.jpg" alt="Ate May">
+                    <div class="member-text">
+                        <h2>Ate May</h2>
+                        <p>Ate May is married with four children—three boys and one girl—and she is the eldest among us siblings. Even though she has her own family, she continues to give us support, guidance, and love.</p>
+                    </div>
+                </div>
+                <div class="member">
+                    <img src="jcel.jpg" alt="Jeselle">
+                    <div class="member-text">
+                        <h2>Jeselle</h2>
+                        <p>Jeselle has faced challenges since childhood, diagnosed with hearing impairment and speech delay due to a medication overdose. She uses a hearing aid and faces life with determination, courage, and resilience. She is an inspiration to us.</p>
+                    </div>
+                </div>
+                <div class="member">
+                    <img src="tin.jpg" alt="Kristine">
+                    <div class="member-text">
+                        <h2>Kristine</h2>
+                        <p>Kristine is the youngest of our siblings, currently in Grade 8 in high school. She continues to grow and learn in a supportive family environment, and her presence brings joy and energy to our home.</p>
+                    </div>
+                </div>
+                
+                <div class="section-footer">© 2025 ♥ With love and gratitude to my family</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hobbies -->
+    <div class="content-modal" id="hobbiesModal">
+        <div class="content-modal-content">
+            <span class="close-modal" onclick="closeContent()">×</span>
+            <button class="back-btn" onclick="backToAbout()">← Back</button>
+            <div class="section-container">
+                <h1>My Hobbies <span class="heart">✨</span></h1>
+                <p class="section-subtitle">Things that make my heart happy and keep me inspired every day!</p>
+                <div class="hobbies-grid">
+                    <div class="hobby-card"><img src="code.jpg" alt="Coding"><div class="hobby-name">Coding</div></div>
+                    <div class="hobby-card"><img src="bible.jpg" alt="Reading Bible"><div class="hobby-name">Reading Bible</div></div>
+                    <div class="hobby-card"><img src="edit.jpg" alt="Editing"><div class="hobby-name">Editing</div></div>
+                    <div class="hobby-card"><img src="music.jpg" alt="Listening to Music"><div class="hobby-name">Listening to Music</div></div>
+                    <div class="hobby-card"><img src="game.jpg" alt="Gaming"><div class="hobby-name">Gaming</div></div>
+                    <div class="hobby-card"><img src="picture.jpg" alt="Photography"><div class="hobby-name">Photography</div></div>
+                    <div class="hobby-card"><img src="play1.jpg" alt="play"><div class="hobby-name">Playing Guitar</div></div>
+                    <div class="hobby-card"><img src="play2.jpg" alt="play"><div class="hobby-name">Playing Piano</div></div>
+                    <div class="hobby-card"><img src="watch.jpg" alt="watch"><div class="hobby-name">Watching BTS Episode & V Live</div></div>
+                </div>
+                <div class="section-footer">© 2025 KC • These little things make life colorful ♡</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- My Pets -->
+    <div class="content-modal" id="petsModal">
+        <div class="content-modal-content">
+            <span class="close-modal" onclick="closeContent()">×</span>
+            <button class="back-btn" onclick="backToAbout()">← Back</button>
+            <div class="section-container">
+                <h1>My Pets <span class="heart">♥</span></h1>
+                <p class="section-subtitle">These little fur babies make every day brighter and full of love!</p>
+                <div class="pets-grid">
+                    <div class="pet-card"><img src="lucky.jpg" alt="Lucky"><div class="pet-name">Lucky</div></div>
+                    <div class="pet-card"><img src="finn.jpg" alt="Finn"><div class="pet-name">Finn</div></div>
+                    <div class="pet-card"><img src="kitty.jpg" alt="Kitty"><div class="pet-name">Kitty</div></div>
+                </div>
+                <div class="section-footer">© 2025 KC • My forever companions ♡</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Role Models -->
+    <div class="content-modal" id="roleModal">
+        <div class="content-modal-content">
+            <span class="close-modal" onclick="closeContent()">×</span>
+            <button class="back-btn" onclick="backToAbout()">← Back</button>
+            <div class="section-container">
+                <h1>My Role Models <span class="heart">★</span></h1>
+                <p class="section-subtitle">People who inspire me to be better every day</p>
+                <div class="role-grid">
+                    <div class="role-card"><img src="mom.jpg" alt="Mama"><div class="role-name">Mama</div></div>
+                    <div class="role-card"><img src="bts.jpg" alt="BTS"><div class="role-name">BTS</div></div>
+                </div>
+                <div class="section-footer">© 2025 KC • They light up my path ♡</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Personality -->
+    <div class="content-modal" id="personalityModal">
+        <div class="content-modal-content">
+            <span class="close-modal" onclick="closeContent()">×</span>
+            <button class="back-btn" onclick="backToAbout()">← Back</button>
+            <div class="section-container">
+                <h1>My Personality <span class="heart">✨</span></h1>
+                <p class="section-subtitle">A little mix of who I am inside and out ♡</p>
+                <div class="traits-grid">
+                    <div class="trait-card"><img src="intro.jpg" alt="Introvert"><div class="trait-name">Quiet Introvert</div></div>
+                    <div class="trait-card"><img src="loyal.jpg" alt="Loyal"><div class="trait-name">Loyal Friend</div></div>
+                    <div class="trait-card"><img src="over.jpg" alt="Overthinker"><div class="trait-name">Certified Overthinker</div></div>
+                    <div class="trait-card"><img src="kind.jpg" alt="Kind"><div class="trait-name">Soft-Hearted</div></div>
+                    <div class="trait-card"><img src="silent.jpg" alt="Fighter"><div class="trait-name">Silent Fighter</div></div>
+                    <div class="trait-card"><img src="out.jpg" alt="out"><div class="trait-name">Extrovert with Friends</div></div>
+                </div>
+                <div class="section-footer">© 2025 KC • Still growing, still learning, still me ♡</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Favorite Sports -->
+    <div class="content-modal" id="sportsModal">
+        <div class="content-modal-content">
+            <span class="close-modal" onclick="closeContent()">×</span>
+            <button class="back-btn" onclick="backToAbout()">← Back</button>
+            <div class="section-container">
+                <h1>Favorite Sports <span class="heart">⚡</span></h1>
+                <p class="section-subtitle">Sports I love watching & sometimes playing too!</p>
+                <div class="sports-grid">
+                    <div class="sport-card"><img src="ball.jpg" alt="Volleyball"><div class="sport-name">Volleyball</div></div>
+                    <div class="sport-card"><img src="bad.jpg" alt="Badminton"><div class="sport-name">Badminton</div></div>
+                </div>
+                <div class="section-footer">© 2025 KC • I love the energy! ♡</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Favorite Songs & Artist -->
+    <div class="content-modal" id="musicModal">
+        <div class="content-modal-content">
+            <span class="close-modal" onclick="closeContent()">×</span>
+            <button class="back-btn" onclick="backToAbout()">← Back</button>
+            <div class="section-container">
+                <h1>Favorite Songs & Artist <span class="heart">♥</span></h1>
+                <p class="section-subtitle">My ultimate comfort artist — BTS forever!</p>
+                <div class="card"><img src="bts.jpg" alt="BTS"><div class="card-title">BTS</div><p>Spring Day</p></div>
+                <div class="songs-grid">
+                    <div class="song-card"><img src="jin.jpg" alt="Epiphany"><div class="song-title">Epiphany</div></div>
+                    <div class="song-card"><img src="jim2.jpg" alt="Serendipity"><div class="song-title">Serendipity</div></div>
+                    <div class="song-card"><img src="kook.jpg" alt="Euphoria"><div class="song-title">Euphoria</div></div>
+                    <div class="song-card"><img src="jim1.jpg" alt="Filter"><div class="song-title">Filter</div></div>
+                </div>
+                <div class="section-footer">© 2025 KC • I purple you, BTS forever 💜</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Favorite Movies & Actors -->
+    <div class="content-modal" id="moviesModal">
+        <div class="content-modal-content">
+            <span class="close-modal" onclick="closeContent()">×</span>
+            <button class="back-btn" onclick="backToAbout()">← Back</button>
+            <div class="section-container">
+                <h1>Favorite Movies & Actors <span class="heart">♥</span></h1>
+                <h2 style="font-size:2rem; color:#a29bfe; margin:3rem 0 1rem;">Favorite Movies</h2>
+                <div class="grid">
+                    <div class="card"><img src="E.jpg" alt="Ang Mutya ng Section E"><div class="card-title">Ang Mutya ng Section E</div></div>
+                    <div class="card"><img src="hwarang.jpg" alt="Hwarang"><div class="card-title">Hwarang</div></div>
+                    <div class="card"><img src="hide.jpg" alt="Hidden Love"><div class="card-title">Hidden Love</div></div>
+                </div>
+                <h2 style="font-size:2rem; color:#a29bfe; margin:3rem 0 1rem;">Favorite Actors</h2>
+                <div class="grid">
+                    <div class="card"><img src="V.jpg" alt="Kim Taehyung"><div class="card-title">Kim Taehyung (V of BTS)</div></div>
+                    <div class="card"><img src="chen.jpg" alt="Chen Zheyuan"><div class="card-title">Chen Zheyuan</div></div>
+                    <div class="card"><img src="chan.jpg" alt="Jackie Chan"><div class="card-title">Jackie Chan</div></div>
+                </div>
+                <div class="section-footer">© 2025 KC • Forever fan ♡</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Favorite Foods & Drinks -->
+    <div class="content-modal" id="foodModal">
+        <div class="content-modal-content">
+            <span class="close-modal" onclick="closeContent()">×</span>
+            <button class="back-btn" onclick="backToAbout()">← Back</button>
+            <div class="section-container">
+                <h1>Favorite Foods & Drinks <span class="heart">♡</span></h1>
+                <h2 style="font-size:2rem; color:#a29bfe; margin:3rem 0 1rem;">Favorite Drinks</h2>
+                <div class="grid-3">
+                    <div class="card"><img src="water.jpg" alt="Water"><div class="card-title">Water (my #1)</div></div>
+                    <div class="card"><img src="float.jpg" alt="Coke Float"><div class="card-title">Coke Float</div></div>
+                    <div class="card"><img src="shake.jpg" alt="Mango Shake"><div class="card-title">Mango Shake</div></div>
+                </div>
+                <h2 style="font-size:2rem; color:#a29bfe; margin:3rem 0 1rem;">Favorite Dishes</h2>
+                <div class="grid-3">
+                    <div class="card"><img src="mong.jpg" alt="Monggo"><div class="card-title">Monggo</div></div>
+                    <div class="card"><img src="lab.jpg" alt="Adobong Labong"><div class="card-title">Adobong Labong</div></div>
+                    <div class="card"><img src="lay.jpg" alt="Ginataang Gulay"><div class="card-title">Ginataang Gulay</div></div>
+                </div>
+                <h2 style="font-size:2rem; color:#a29bfe; margin:3rem 0 1rem;">Favorite Midnight Snacks</h2>
+                <div class="grid-4">
+                    <div class="card"><img src="salad1.jpg" alt="Macaroni Salad"><div class="card-title">Macaroni Salad</div></div>
+                    <div class="card"><img src="salad2.jpg" alt="Vegetable Salad"><div class="card-title">Vegetable Salad</div></div>
+                    <div class="card"><img src="carb.jpg" alt="Carbonara"><div class="card-title">Carbonara</div></div>
+                    <div class="card"><img src="shaw.jpg" alt="Shawarma"><div class="card-title">Shawarma</div></div>
+                </div>
+                <div class="section-footer">© 2025 KC • Food is love ♡</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- My Best Friends -->
+    <div class="content-modal" id="bestfriendsModal">
+        <div class="content-modal-content">
+            <span class="close-modal" onclick="closeContent()">×</span>
+            <button class="back-btn" onclick="backToAbout()">← Back</button>
+            <div class="section-container">
+                <h1>My Best Friends <span class="heart">♡</span></h1>
+                <p class="section-subtitle">Friends who have become part of my life, even though some paths are different now</p>
+                <div class="friends-grid">
+                    <div class="friend-card">
+                        <div class="friend-info">
+                            <div class="friend-name">Dimple</div>
+                            <div class="friend-letter">My best friend since Grade 7 — we've been friends for 6 years! Kind but can also be a bit of a menace when it comes to joking around. ♡</div>
+                        </div>
+                    </div>
+                    <div class="friend-card">
+                        <div class="friend-info">
+                            <div class="friend-name">Jacquelyn</div>
+                            <div class="friend-letter">I first met her in Grade 11. We became close quickly and started hanging out right away. Now she has a blessed baby. ♡</div>
+                        </div>
+                    </div>
+                   <div class="friend-card">
+                        <div class="friend-info">
+                            <div class="friend-name">Airah</div>
+                            <div class="friend-letter">My mamhiee, she's kind, introvert too just like me and we are same vibes. ♡</div>
+                        </div>
+                    </div>
+                    <div class="friend-card">
+                        <div class="friend-info">
+                            <div class="friend-name">Lyka</div>
+                            <div class="friend-letter">We were really close back then, inseparable..♡</div>
+                        </div>
+                    </div>
+                    <div class="friend-card">
+                        <div class="friend-info">
+                            <div class="friend-name">Danielle</div>
+                            <div class="friend-letter">My closest friend back then. We were always together everywhere, it felt like we couldn't be separated..♡</div>
+                        </div>
+                    </div>
+                    <div class="friend-card">
+                        <div class="friend-info">
+                            <div class="friend-name">Kim</div>
+                            <div class="friend-letter">We were very close even though it was brief. Rest in peace, Kim. It's been 8 months... ♡</div>
+                        </div>
+                    </div>
+                    <div class="friend-card">
+                        <div class="friend-info">
+                            <div class="friend-name">Jaren</div>
+                            <div class="friend-letter">My first boy best friend! Partner in crime in all our crazy adventures. Really intense and fun! ♡</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-footer">© 2025 KC • Thank you for the memories ♡</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- My Circle of Friends 2025 -->
+    <div class="content-modal" id="circleModal">
+        <div class="content-modal-content">
+            <span class="close-modal" onclick="closeContent()">×</span>
+            <button class="back-btn" onclick="backToAbout()">← Back</button>
+            <div class="section-container">
+                <h1>My Circle of Friends 2025 <span class="heart">♡</span></h1>
+                <p class="section-subtitle">The people I'm with this year — thank you for all the laughter and support! ♡</p>
+                <div class="circle-grid">
+                    <div class="friend-card"><img src="stell.jpg" alt="Stell"><div class="friend-name">Stell</div></div>
+                    <div class="friend-card"><img src="aica.jpg" alt="Maica"><div class="friend-name">Maica</div></div>
+                    <div class="friend-card"><img src="cole.jpg" alt="Nicole"><div class="friend-name">Nicole</div></div>
+                    <div class="friend-card"><img src="glad.jpg" alt="Glades"><div class="friend-name">Glades</div></div>
+                    <div class="friend-card"><img src="rona.jpg" alt="Ronamie"><div class="friend-name">Ronamie</div></div>
+                    <div class="friend-card"><img src="dine.jpg" alt="Nadine"><div class="friend-name">Nadine</div></div>
+                    <div class="friend-card"><img src="she.jpg" alt="Meshel"><div class="friend-name">Meshel</div></div>
+                    <div class="friend-card"><img src="clark.jpg" alt="Clark"><div class="friend-name">Clark</div></div>
+                    <div class="friend-card"><img src="ryl.jpg" alt="Ryl"><div class="friend-name">Ryl</div></div>
+                    <div class="friend-card"><img src="jo.jpg" alt="Joana"><div class="friend-name">Joana</div></div>
+                </div>
+                <div class="section-footer">© 2025 KC • Grateful for you all ♡</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- My Projects Modal (simple muna, pwede mo pa i-improve) -->
+    <div class="modal" id="projectsModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeContent()">×</span>
+            <button class="back-btn" onclick="backToAbout()">← Back</button>
+            <span class="close-modal" id="closeProjects">×</span>
+            <h2 class="modal-title">My Projects</h2>
+            <div class="modal-grid">
+                <a href="STORY.html" target="_blank" class="modal-btn"><i class="fas fa-book"></i>View STORY</a>
+                <a href="RECIPE.html" target="_blank" class="modal-btn"><i class="fas fa-receipt"></i>View RECIPE</a>
+                <a href="ORDERFORM.html" target="_blank" class="modal-btn"><i class="fas fa-list"></i>View ORDER FORM</a>
+                <a href="BIKE_ACT4.html" target="_blank" class="modal-btn"><i class="fas fa-bike"></i>View BIKE_ACT4</a>
+                <a href="OFPHP.html" target="_blank" class="modal-btn"><i class="fas fa-list"></i>View ORDER FORM PHP</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- GALLERY MODAL -->
+<div class="modal" id="galleryModal">
+<div class="modal-content">
+<span class="close-modal" id="closeGallery">×</span>
+<h2 class="modal-title">📸 My Gallery</h2>
+
+<div class="grid-4">
+<div class="card"><img src="02.jpg"><div class="card-title">BSIT 1F</div></div>
+<div class="card"><img src="04.jpg"><div class="card-title">COF 2.0</div></div>
+<div class="card"><img src="21.jpg"><div class="card-title">TAMBOLIRA 2023 - BAND</div></div>
+<div class="card"><img src="22.jpg"><div class="card-title">FRIENDS</div></div>
+<div class="card"><img src="23.jpg"><div class="card-title">FRIENDS</div></div>
+<div class="card"><img src="24.jpg"><div class="card-title">BOYIEE</div></div>
+<div class="card"><img src="26.jpg"><div class="card-title">LOVEY</div></div>
+<div class="card"><img src="27.jpg"><div class="card-title">BEST COF 1.0</div></div>
+<div class="card"><img src="29.jpg"><div class="card-title">TAMBOLIRA 2023 - BAND</div></div>
+<div class="card"><img src="32.jpg"><div class="card-title">GRADE11 </div></div>
+<div class="card"><img src="34.jpg"><div class="card-title">BEST COF 1.0</div></div>
+<div class="card"><img src="36.jpg"><div class="card-title">BEST COF 1.0</div></div>
+</div>
+</div>
+</div>
+
+<script>
+document.querySelectorAll('.nav-btn').forEach(btn=>{
+btn.onclick=()=>{
+document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+btn.classList.add('active');
+document.getElementById(btn.dataset.tab).classList.add('active');
+}
+});
+
+openGalleryModal.onclick=()=>galleryModal.style.display='flex';
+closeGallery.onclick=()=>galleryModal.style.display='none';
+</script>
+
+</body>
+</html>
+
+    <!-- (All other content modals: hobbiesModal, petsModal, roleModal, personalityModal, sportsModal, musicModal, moviesModal, foodModal, bestfriendsModal, circleModal) -->
+    <!-- Lahat sila nandito pa rin, same code mo. Para hindi masyadong mahaba ang response, pero sa actual file mo, ilagay mo lahat from your original code. -->
+
+    <script>
+        // Tab switching
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById(btn.getAttribute('data-tab')).classList.add('active');
+            });
+        });
+
+        // Modal functions (your original)
+        document.getElementById('openAboutModal').onclick = () => document.getElementById('aboutModal').style.display = 'flex';
+        document.getElementById('openProjectsModal').onclick = () => document.getElementById('projectsModal').style.display = 'flex';
+        document.getElementById('closeAbout').onclick = () => document.getElementById('aboutModal').style.display = 'none';
+        document.getElementById('closeProjects').onclick = () => document.getElementById('projectsModal').style.display = 'none';
+
+        function openContent(modalId) {
+            document.getElementById('aboutModal').style.display = 'none';
+            document.getElementById(modalId).style.display = 'flex';
+        }
+        function backToAbout() {
+            document.querySelectorAll('.content-modal').forEach(m => m.style.display = 'none');
+            document.getElementById('aboutModal').style.display = 'flex';
+        }
+        function closeContent() {
+            document.querySelectorAll('.content-modal').forEach(m => m.style.display = 'none');
+        }
+        window.onclick = (e) => {
+            if (e.target.classList.contains('modal') || e.target.classList.contains('content-modal')) {
+                e.target.style.display = 'none';
+            }
+        };
+
+        // Shooting stars
+        function createShootingStar() {
+            const s = document.createElement('div');
+            s.classList.add('shooting-star');
+            s.style.left = Math.random() * window.innerWidth + 'px';
+            s.style.top = Math.random() * window.innerHeight * 0.4 + 'px';
+            s.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            document.body.appendChild(s);
+            setTimeout(() => s.remove(), 6000);
+        }
+        setInterval(createShootingStar, 1600);
+        for(let i = 0; i < 5; i++) setTimeout(createShootingStar, i * 700);
+    </script>
+</body>
+</html>

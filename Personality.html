@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personality - KC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            min-height: 100vh;
+            background: #000;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Galaxy Background */
+        #space { position: fixed; inset: 0; background: radial-gradient(ellipse at bottom, #1b2735 0%, #000 100%); z-index: -3; }
+        #stars { position: fixed; inset: 0; background: transparent url('https://assets.codepen.io/1538474/stars.png') repeat; animation: drift 250s linear infinite; opacity: 0.8; z-index: -2; }
+        @keyframes drift { from { background-position: 0 0; } to { background-position: 1000px 1000px; } }
+        #nebula { position: fixed; inset: 0; background: url('https://assets.codepen.io/1538474/nebula.png') center/cover no-repeat; opacity: 0.25; animation: rotate 300s linear infinite; z-index: -1; }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .content-modal-content {
+            background: rgba(30,30,60,0.95);
+            padding: 3rem;
+            border-radius: 25px;
+            max-width: 1000px;
+            width: 90%;
+            margin: 2rem auto;
+            position: relative;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(120,115,245,0.5);
+            max-height: 95vh;
+            overflow-y: auto;
+        }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 2.8rem; cursor: pointer; color: #fff; z-index: 10; }
+        .back-btn {
+            position: absolute; top: 20px; left: 25px;
+            background: rgba(120,115,245,0.4); border: 2px solid rgba(120,115,245,0.6);
+            color: white; padding: 12px 22px; border-radius: 50px; font-size: 1.1rem;
+            cursor: pointer; backdrop-filter: blur(10px); transition: all 0.4s;
+            box-shadow: 0 0 20px rgba(120,115,245,0.5); z-index: 11;
+        }
+        .back-btn:hover { background: rgba(120,115,245,0.8); transform: translateY(-3px); }
+
+        /* Personality Section */
+        .personality-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+        }
+        .personality-container h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4.5rem;
+            color: #ffb6c1;
+            margin-bottom: 10px;
+        }
+        .personality-subtitle {
+            font-size: 1.4rem;
+            color: #ff9999;
+            margin-bottom: 50px;
+            font-style: italic;
+        }
+        .traits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .trait-card {
+            background: rgba(50,30,80,0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid rgba(255,182,193,0.4);
+            transition: all 0.4s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .trait-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(255,105,180,0.4);
+            border-color: #ff6b9d;
+        }
+        .trait-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+        .trait-name {
+            padding: 18px;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #ffb6c1;
+            background: rgba(0,0,0,0.4);
+        }
+        .sparkle {
+            color: #e0aaff;
+            animation: sparkle 2s infinite;
+            margin-left: 8px;
+        }
+        @keyframes sparkle { 0%,100% { opacity:0.8; } 50% { opacity:1; transform:scale(1.4); } }
+
+        .personality-footer {
+            margin-top: 80px;
+            font-size: 1.2rem;
+            color: #ff9999;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Galaxy Background -->
+    <div id="space"></div>
+    <div id="stars"></div>
+    <div id="nebula"></div>
+
+    <div class="content-modal-content">
+        <span class="close-modal" onclick="window.close()">×</span>
+        <button class="back-btn" onclick="history.back()">← Back</button>
+
+        <div class="personality-container">
+            <h1>My Personality <span class="sparkle">✨</span></h1>
+            <p class="personality-subtitle">A little mix of who I am inside and out ♡</p>
+
+            <div class="traits-grid">
+
+                <!-- Trait 1 -->
+                <div class="trait-card">
+                    <img src="intro.jpg" alt="Introvert">
+                    <div class="trait-name">Quiet Introvert</div>
+                </div>
+
+                <!-- Trait 3 -->
+                <div class="trait-card">
+                    <img src="loyal.jpg" alt="Loyal">
+                    <div class="trait-name">Loyal Friend</div>
+                </div>
+
+                <!-- Trait 4 -->
+                <div class="trait-card">
+                    <img src="over.jpg" alt="Overthinker">
+                    <div class="trait-name">Certified Overthinker</div>
+                </div>
+
+                <!-- Trait 5 -->
+                <div class="trait-card">
+                    <img src="kind.jpg" alt="Kind">
+                    <div class="trait-name">Soft-Hearted</div>
+                </div>
+
+                <!-- Trait 6 -->
+                <div class="trait-card">
+                    <img src="silent.jpg" alt="Fighter">
+                    <div class="trait-name">Silent Fighter</div>
+                </div>
+
+            </div>
+
+            <div class="personality-footer">
+                © 2025 KC • Still growing, still learning, still me ♡
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

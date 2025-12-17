@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Order Form</title>
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        background:#f4f6f8;
+        padding:40px
+    }
+    .order-form{
+        max-width:500px;
+        margin:auto;
+        background:white;
+        padding:30px;
+        border-radius:10px;
+        box-shadow:0 4px 15px rgba(0,0,0,0.1)
+    }
+    .order-form h2{
+        text-align:center;
+        margin-bottom:20px
+    }
+    input, textarea, select{
+        width:100%;
+        padding:12px;
+        margin:10px 0;
+        border:1px solid #ccc;
+        border-radius:6px;
+        font-size:16px
+    }
+    button{
+        width:100%;
+        padding:15px;
+        background:#4caf50;
+        color:white;
+        font-size:18px;
+        border:none;
+        border-radius:8px;
+        cursor:pointer
+    }
+    button:hover{
+        background:#388e3c
+    }
+</style>
+</head>
+
+<body>
+
+<div class="order-form">
+    <h2>Order Form</h2>
+
+    <form>
+        <input type="text" placeholder="Full Name" required>
+
+        <input type="tel" placeholder="Contact Number" required>
+
+        <textarea placeholder="Delivery Address" required></textarea>
+
+        <select required>
+            <option value="">Select Product</option>
+            <option>Tofu</option>
+            <option>Taho</option>
+            <option>Soy Milk</option>
+        </select>
+
+        <input type="number" placeholder="Quantity" min="1" required>
+
+        <textarea placeholder="Additional Notes"></textarea>
+
+        <button type="submit">Submit Order</button>
+    </form>
+</div>
+
+</body>
+</html>
